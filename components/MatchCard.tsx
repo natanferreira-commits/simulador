@@ -23,12 +23,12 @@ export function MatchCard({ match, onScoreChange }: Props) {
 
   return (
     <div className="py-2.5">
-      <div className="text-[10px] font-medium uppercase tracking-wider text-zinc-400 mb-1.5">
+      <div className="text-[10px] font-medium uppercase tracking-wider text-zinc-500 mb-1.5">
         {formatMatchDate(match.date)}
       </div>
       <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2">
         <div className="flex items-center justify-end gap-1.5 min-w-0">
-          <span className="text-xs font-semibold text-zinc-700 truncate">{home.code}</span>
+          <span className="text-xs font-semibold text-zinc-300 truncate">{home.code}</span>
           <Flag code={home.flag} />
         </div>
         <div className="flex items-center gap-1">
@@ -38,23 +38,23 @@ export function MatchCard({ match, onScoreChange }: Props) {
             max={99}
             value={match.homeGoals ?? ""}
             onChange={(e) => onScoreChange(parseGoals(e.target.value), match.awayGoals)}
-            className="w-8 h-8 text-center border border-zinc-300 rounded text-sm font-bold text-zinc-900 outline-none focus:border-zinc-900 focus:ring-2 focus:ring-zinc-900/10 transition tabular-nums"
+            className="w-8 h-8 text-center bg-zinc-900 border border-zinc-700 rounded text-sm font-bold text-zinc-50 outline-none focus:border-zinc-400 focus:ring-2 focus:ring-zinc-400/20 transition tabular-nums"
             placeholder=""
           />
-          <span className="text-zinc-300 text-[10px] font-light">x</span>
+          <span className="text-zinc-700 text-[10px] font-light">x</span>
           <input
             type="number"
             min={0}
             max={99}
             value={match.awayGoals ?? ""}
             onChange={(e) => onScoreChange(match.homeGoals, parseGoals(e.target.value))}
-            className="w-8 h-8 text-center border border-zinc-300 rounded text-sm font-bold text-zinc-900 outline-none focus:border-zinc-900 focus:ring-2 focus:ring-zinc-900/10 transition tabular-nums"
+            className="w-8 h-8 text-center bg-zinc-900 border border-zinc-700 rounded text-sm font-bold text-zinc-50 outline-none focus:border-zinc-400 focus:ring-2 focus:ring-zinc-400/20 transition tabular-nums"
             placeholder=""
           />
         </div>
         <div className="flex items-center gap-1.5 min-w-0">
           <Flag code={away.flag} />
-          <span className="text-xs font-semibold text-zinc-700 truncate">{away.code}</span>
+          <span className="text-xs font-semibold text-zinc-300 truncate">{away.code}</span>
         </div>
       </div>
     </div>

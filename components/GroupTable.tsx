@@ -13,7 +13,7 @@ export function GroupTable({ standings }: Props) {
     <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
-          <tr className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 border-b border-zinc-100">
+          <tr className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500 border-b border-zinc-800">
             <th className="text-left py-2 px-1 w-6"></th>
             <th className="text-left py-2 px-1 font-medium">Classificação</th>
             <th className="text-center py-2 px-2 w-8">P</th>
@@ -32,19 +32,19 @@ export function GroupTable({ standings }: Props) {
             return (
               <tr
                 key={s.teamId}
-                className="border-b border-zinc-50 hover:bg-zinc-50/70 transition"
+                className="border-b border-zinc-900 hover:bg-zinc-900/50 transition"
                 title={s.tiebreakerReason ? `Desempate: ${s.tiebreakerReason}` : undefined}
               >
-                <td className="py-2.5 px-1 text-blue-600 text-xs font-medium tabular-nums">
+                <td className="py-2.5 px-1 text-blue-400 text-xs font-medium tabular-nums">
                   {s.position}
                 </td>
                 <td className="py-2.5 px-1">
                   <div className="flex items-center gap-2">
                     <Flag code={team.flag} />
-                    <span className="text-zinc-900 font-medium">{team.name}</span>
+                    <span className="text-zinc-100 font-medium">{team.name}</span>
                   </div>
                 </td>
-                <td className="text-center py-2.5 px-2 font-bold tabular-nums text-zinc-900">{s.points}</td>
+                <td className="text-center py-2.5 px-2 font-bold tabular-nums text-zinc-50">{s.points}</td>
                 <td className="text-center py-2.5 px-2 tabular-nums text-zinc-500">{s.played}</td>
                 <td className="text-center py-2.5 px-2 tabular-nums text-zinc-500">{s.wins}</td>
                 <td className="text-center py-2.5 px-2 tabular-nums text-zinc-500">{s.draws}</td>

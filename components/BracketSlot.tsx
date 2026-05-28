@@ -29,31 +29,31 @@ function Side({
   return (
     <div
       className={`flex items-center gap-2.5 px-3 py-2 min-w-0 ${
-        isWinner ? "" : isLoser ? "opacity-50" : ""
+        isWinner ? "" : isLoser ? "opacity-40" : ""
       }`}
     >
       {team ? (
         <Flag code={team.flag} className="!w-5 !h-4" />
       ) : (
-        <div className="w-5 h-4 bg-zinc-100 rounded-sm shrink-0" />
+        <div className="w-5 h-4 bg-zinc-800 rounded-sm shrink-0" />
       )}
       <span
         className={`text-sm truncate flex-1 ${
           team
             ? isWinner
-              ? "font-bold text-zinc-900"
-              : "text-zinc-700"
-            : "text-zinc-400 italic"
+              ? "font-bold text-zinc-50"
+              : "text-zinc-300"
+            : "text-zinc-600 italic"
         }`}
       >
         {team?.code ?? label}
       </span>
       {penaltyMark && (
-        <span className="text-[10px] text-zinc-400 font-mono">pen</span>
+        <span className="text-[10px] text-zinc-500 font-mono">pen</span>
       )}
       <span
         className={`text-sm tabular-nums w-4 text-right ${
-          isWinner ? "font-bold text-zinc-900" : "text-zinc-500"
+          isWinner ? "font-bold text-zinc-50" : "text-zinc-500"
         }`}
       >
         {goals !== null ? goals : ""}
@@ -78,7 +78,7 @@ export function BracketSlot({ match, onClick, size = "sm" }: Props) {
   return (
     <button
       onClick={onClick}
-      className={`${widthClass} bg-white border border-zinc-200 rounded-md hover:border-zinc-900 hover:shadow-md focus:border-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900/10 transition group text-left`}
+      className={`${widthClass} bg-zinc-900 border border-zinc-800 rounded-md hover:border-zinc-500 hover:bg-zinc-800/80 focus:border-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-400/20 transition group text-left`}
     >
       <Side
         teamId={match.homeTeamId}
@@ -88,7 +88,7 @@ export function BracketSlot({ match, onClick, size = "sm" }: Props) {
         isLoser={homeLoser}
         penaltyMark={drawn && score.penaltyWinner === "home"}
       />
-      <div className="h-px bg-zinc-100" />
+      <div className="h-px bg-zinc-800" />
       <Side
         teamId={match.awayTeamId}
         label={match.awayLabel}
@@ -98,7 +98,7 @@ export function BracketSlot({ match, onClick, size = "sm" }: Props) {
         penaltyMark={drawn && score.penaltyWinner === "away"}
       />
       {match.needsPenaltyDecision && (
-        <div className="text-[10px] text-amber-600 font-bold uppercase text-center py-1 border-t border-amber-200 bg-amber-50">
+        <div className="text-[10px] text-amber-400 font-bold uppercase text-center py-1 border-t border-amber-900/50 bg-amber-950/40">
           definir pênaltis
         </div>
       )}

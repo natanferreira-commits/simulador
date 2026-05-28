@@ -60,7 +60,7 @@ export default function KnockoutPage() {
   if (!hasHydrated) {
     return (
       <div className="flex flex-1 items-center justify-center">
-        <div className="text-sm text-zinc-400">Carregando...</div>
+        <div className="text-sm text-zinc-600">Carregando...</div>
       </div>
     );
   }
@@ -68,19 +68,19 @@ export default function KnockoutPage() {
 
   return (
     <div className="flex-1 w-full max-w-7xl mx-auto px-4 py-6">
-      <header className="flex items-center justify-between mb-4 pb-4 border-b border-zinc-200">
+      <header className="flex items-center justify-between mb-4 pb-4 border-b border-zinc-800">
         <div>
           <div className="text-[10px] font-semibold uppercase tracking-widest text-zinc-500">
             Palpite de
           </div>
-          <h1 className="text-xl font-bold text-zinc-900">{userName}</h1>
+          <h1 className="text-xl font-bold text-zinc-50">{userName}</h1>
         </div>
         <button
           onClick={() => {
             if (confirm("Apagar todos os placares do mata-mata?"))
               resetKnockout();
           }}
-          className="text-xs px-3 h-8 rounded border border-zinc-300 text-zinc-700 hover:bg-zinc-50 transition"
+          className="text-xs px-3 h-8 rounded border border-zinc-700 text-zinc-300 hover:bg-zinc-900 transition"
         >
           Limpar mata-mata
         </button>
@@ -91,11 +91,11 @@ export default function KnockoutPage() {
       </div>
 
       {!groupsComplete && (
-        <div className="mb-6 p-4 border border-amber-200 bg-amber-50 rounded-md">
-          <div className="text-sm font-semibold text-amber-900 mb-1">
+        <div className="mb-6 p-4 border border-amber-900/50 bg-amber-950/30 rounded-md">
+          <div className="text-sm font-semibold text-amber-200 mb-1">
             Fase de grupos ainda não terminou
           </div>
-          <p className="text-xs text-amber-800 leading-relaxed">
+          <p className="text-xs text-amber-300/80 leading-relaxed">
             Você preencheu <strong>{totalGroupFilled} de 72 jogos</strong> da fase de grupos.
             O chaveamento abaixo só vai mostrar os times corretos quando todos os
             grupos estiverem fechados.{" "}
@@ -115,12 +115,12 @@ export default function KnockoutPage() {
       {/* Bracket */}
       <BracketView matches={resolvedBracket} onSelectMatch={setSelectedMatchId} />
 
-      {/* Ranking dos 8 melhores 3ºs (após o bracket pra dar destaque ao bracket) */}
+      {/* Ranking dos 8 melhores 3ºs */}
       {groupsComplete && (
-        <section className="mt-10 pt-8 border-t border-zinc-200">
-          <h2 className="text-xs font-bold uppercase tracking-widest text-zinc-700 mb-3">
+        <section className="mt-10 pt-8 border-t border-zinc-800">
+          <h2 className="text-xs font-bold uppercase tracking-widest text-zinc-300 mb-3">
             Ranking dos terceiros colocados
-            <span className="ml-2 text-zinc-400 font-normal normal-case tracking-normal">
+            <span className="ml-2 text-zinc-500 font-normal normal-case tracking-normal">
               8 melhores avançam
             </span>
           </h2>
@@ -132,13 +132,13 @@ export default function KnockoutPage() {
                   key={t.teamId}
                   className={`flex items-center gap-2 px-3 py-2 rounded border text-xs ${
                     t.qualifies
-                      ? "border-emerald-200 bg-emerald-50/50"
-                      : "border-zinc-200 bg-zinc-50/50 opacity-60"
+                      ? "border-emerald-900/60 bg-emerald-950/30 text-zinc-200"
+                      : "border-zinc-800 bg-zinc-900/40 text-zinc-500 opacity-60"
                   }`}
                 >
                   <span
                     className={`w-5 text-[10px] font-bold tabular-nums ${
-                      t.qualifies ? "text-emerald-700" : "text-zinc-400"
+                      t.qualifies ? "text-emerald-400" : "text-zinc-600"
                     }`}
                   >
                     {t.rank}º
@@ -155,7 +155,7 @@ export default function KnockoutPage() {
         </section>
       )}
 
-      <footer className="mt-12 pt-6 border-t border-zinc-100 text-center text-[10px] text-zinc-400">
+      <footer className="mt-12 pt-6 border-t border-zinc-900 text-center text-[10px] text-zinc-600">
         by Dupla / Arena — regras oficiais FIFA 2026
       </footer>
 

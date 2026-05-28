@@ -35,7 +35,7 @@ export function BracketView({ matches, onSelectMatch }: Props) {
   }) {
     return (
       <div className="flex flex-col items-center">
-        <div className="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-5 whitespace-nowrap">
+        <div className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-5 whitespace-nowrap">
           {title}
         </div>
         <div
@@ -77,7 +77,7 @@ export function BracketView({ matches, onSelectMatch }: Props) {
 
         {/* CENTER */}
         <div className="flex flex-col items-center justify-center gap-8 px-6 min-w-[280px]">
-          <div className="text-sm font-bold uppercase tracking-widest text-zinc-700 mb-1">
+          <div className="text-sm font-bold uppercase tracking-widest text-zinc-200 mb-1">
             {STAGE_LABEL.F}
           </div>
           <div className="text-5xl text-center">🏆</div>
@@ -86,8 +86,8 @@ export function BracketView({ matches, onSelectMatch }: Props) {
             size="lg"
             onClick={() => onSelectMatch(CENTER.FINAL)}
           />
-          <div className="border-t border-dashed border-zinc-200 w-full my-4" />
-          <div className="text-xs font-bold uppercase tracking-widest text-zinc-500">
+          <div className="border-t border-dashed border-zinc-800 w-full my-4" />
+          <div className="text-xs font-bold uppercase tracking-widest text-zinc-400">
             {STAGE_LABEL["3RD"]}
           </div>
           <BracketSlot

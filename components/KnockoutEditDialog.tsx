@@ -37,7 +37,6 @@ export function KnockoutEditDialog({ match, onClose, onSave }: Props) {
   const [awayGoals, setAwayGoals] = useState<number | null>(null);
   const [penaltyWinner, setPenaltyWinner] = useState<"home" | "away" | undefined>();
 
-  // Sync when match prop changes
   useEffect(() => {
     if (match) {
       setHomeGoals(match.score.homeGoals);
@@ -46,7 +45,6 @@ export function KnockoutEditDialog({ match, onClose, onSave }: Props) {
     }
   }, [match]);
 
-  // Open/close native dialog
   useEffect(() => {
     const dlg = dialogRef.current;
     if (!dlg) return;
@@ -61,7 +59,7 @@ export function KnockoutEditDialog({ match, onClose, onSave }: Props) {
     return (
       <dialog
         ref={dialogRef}
-        className="rounded-lg p-0 backdrop:bg-black/40"
+        className="rounded-lg p-0 bg-transparent"
         onClose={onClose}
       />
     );
@@ -88,21 +86,21 @@ export function KnockoutEditDialog({ match, onClose, onSave }: Props) {
   return (
     <dialog
       ref={dialogRef}
-      className="rounded-lg p-0 backdrop:bg-black/40 w-full max-w-md"
+      className="rounded-lg p-0 bg-transparent w-full max-w-md"
       onClose={onClose}
     >
-      <div className="bg-white">
+      <div className="bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden">
         {/* Header */}
-        <div className="px-6 pt-5 pb-3 border-b border-zinc-100">
-          <div className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">
+        <div className="px-6 pt-5 pb-3 border-b border-zinc-800">
+          <div className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
             {STAGE_LABEL[match.stage]} · Jogo {match.id}
           </div>
         </div>
 
         {!teamsKnown ? (
           <div className="px-6 py-12 text-center">
-            <p className="text-sm text-zinc-500 mb-1">Confronto ainda não definido</p>
-            <p className="text-xs text-zinc-400 leading-relaxed">
+            <p className="text-sm text-zinc-400 mb-1">Confronto ainda não definido</p>
+            <p className="text-xs text-zinc-500 leading-relaxed">
               {match.homeLabel} vs {match.awayLabel}
               <br />
               Preencha as rodadas anteriores primeiro.
@@ -110,12 +108,11 @@ export function KnockoutEditDialog({ match, onClose, onSave }: Props) {
           </div>
         ) : (
           <>
-            {/* Match */}
             <div className="px-6 py-6">
               <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4">
                 <div className="flex flex-col items-center gap-2">
                   <Flag code={home!.flag} className="!w-10 !h-7" />
-                  <span className="text-xs font-bold text-zinc-700 text-center">
+                  <span className="text-xs font-bold text-zinc-200 text-center">
                     {home!.name}
                   </span>
                 </div>
@@ -126,33 +123,32 @@ export function KnockoutEditDialog({ match, onClose, onSave }: Props) {
                     max={99}
                     value={homeGoals ?? ""}
                     onChange={(e) => setHomeGoals(parseGoals(e.target.value))}
-                    className="w-12 h-14 text-center border border-zinc-300 rounded-lg text-2xl font-bold text-zinc-900 outline-none focus:border-zinc-900 focus:ring-2 focus:ring-zinc-900/10 transition tabular-nums"
+                    className="w-12 h-14 text-center bg-zinc-950 border border-zinc-700 rounded-lg text-2xl font-bold text-zinc-50 outline-none focus:border-zinc-400 focus:ring-2 focus:ring-zinc-400/20 transition tabular-nums"
                     autoFocus
                     placeholder=""
                   />
-                  <span className="text-xs text-zinc-300">x</span>
+                  <span className="text-xs text-zinc-700">x</span>
                   <input
                     type="number"
                     min={0}
                     max={99}
                     value={awayGoals ?? ""}
                     onChange={(e) => setAwayGoals(parseGoals(e.target.value))}
-                    className="w-12 h-14 text-center border border-zinc-300 rounded-lg text-2xl font-bold text-zinc-900 outline-none focus:border-zinc-900 focus:ring-2 focus:ring-zinc-900/10 transition tabular-nums"
+                    className="w-12 h-14 text-center bg-zinc-950 border border-zinc-700 rounded-lg text-2xl font-bold text-zinc-50 outline-none focus:border-zinc-400 focus:ring-2 focus:ring-zinc-400/20 transition tabular-nums"
                     placeholder=""
                   />
                 </div>
                 <div className="flex flex-col items-center gap-2">
                   <Flag code={away!.flag} className="!w-10 !h-7" />
-                  <span className="text-xs font-bold text-zinc-700 text-center">
+                  <span className="text-xs font-bold text-zinc-200 text-center">
                     {away!.name}
                   </span>
                 </div>
               </div>
 
-              {/* Penalty selector */}
               {drawn && (
-                <div className="mt-6 pt-4 border-t border-zinc-100">
-                  <div className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2 text-center">
+                <div className="mt-6 pt-4 border-t border-zinc-800">
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-2 text-center">
                     Quem ganhou nos pênaltis?
                   </div>
                   <div className="flex gap-2">
@@ -160,8 +156,8 @@ export function KnockoutEditDialog({ match, onClose, onSave }: Props) {
                       onClick={() => setPenaltyWinner("home")}
                       className={`flex-1 h-10 text-xs font-bold rounded border transition ${
                         penaltyWinner === "home"
-                          ? "bg-zinc-900 text-white border-zinc-900"
-                          : "bg-white text-zinc-700 border-zinc-300 hover:border-zinc-500"
+                          ? "bg-zinc-50 text-zinc-950 border-zinc-50"
+                          : "bg-transparent text-zinc-300 border-zinc-700 hover:border-zinc-500"
                       }`}
                     >
                       {home!.code}
@@ -170,8 +166,8 @@ export function KnockoutEditDialog({ match, onClose, onSave }: Props) {
                       onClick={() => setPenaltyWinner("away")}
                       className={`flex-1 h-10 text-xs font-bold rounded border transition ${
                         penaltyWinner === "away"
-                          ? "bg-zinc-900 text-white border-zinc-900"
-                          : "bg-white text-zinc-700 border-zinc-300 hover:border-zinc-500"
+                          ? "bg-zinc-50 text-zinc-950 border-zinc-50"
+                          : "bg-transparent text-zinc-300 border-zinc-700 hover:border-zinc-500"
                       }`}
                     >
                       {away!.code}
@@ -181,25 +177,24 @@ export function KnockoutEditDialog({ match, onClose, onSave }: Props) {
               )}
             </div>
 
-            {/* Footer */}
-            <div className="px-6 py-4 bg-zinc-50 flex items-center justify-between gap-2">
+            <div className="px-6 py-4 bg-zinc-950/60 border-t border-zinc-800 flex items-center justify-between gap-2">
               <button
                 onClick={handleClear}
-                className="text-xs text-zinc-500 hover:text-zinc-900 transition"
+                className="text-xs text-zinc-500 hover:text-zinc-200 transition"
               >
                 Limpar
               </button>
               <div className="flex gap-2">
                 <button
                   onClick={onClose}
-                  className="px-4 h-9 rounded text-xs font-semibold text-zinc-700 hover:bg-zinc-100 transition"
+                  className="px-4 h-9 rounded text-xs font-semibold text-zinc-300 hover:bg-zinc-800 transition"
                 >
                   Cancelar
                 </button>
                 <button
                   onClick={handleSave}
                   disabled={drawn && !penaltyWinner}
-                  className="px-5 h-9 rounded bg-zinc-900 text-white text-xs font-bold uppercase tracking-wider hover:bg-zinc-700 transition disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="px-5 h-9 rounded bg-zinc-50 text-zinc-950 text-xs font-bold uppercase tracking-wider hover:bg-white transition disabled:opacity-30 disabled:cursor-not-allowed"
                 >
                   Salvar
                 </button>

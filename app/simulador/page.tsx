@@ -33,7 +33,7 @@ export default function SimulatorPage() {
   if (!hasHydrated) {
     return (
       <div className="flex flex-1 items-center justify-center">
-        <div className="text-sm text-zinc-400">Carregando...</div>
+        <div className="text-sm text-zinc-600">Carregando...</div>
       </div>
     );
   }
@@ -46,15 +46,15 @@ export default function SimulatorPage() {
   return (
     <div className="flex-1 w-full max-w-6xl mx-auto px-4 py-6">
       {/* Header */}
-      <header className="flex items-center justify-between mb-4 pb-4 border-b border-zinc-200">
+      <header className="flex items-center justify-between mb-4 pb-4 border-b border-zinc-800">
         <div>
           <div className="text-[10px] font-semibold uppercase tracking-widest text-zinc-500">
             Palpite de
           </div>
-          <h1 className="text-xl font-bold text-zinc-900">{userName}</h1>
+          <h1 className="text-xl font-bold text-zinc-50">{userName}</h1>
         </div>
-        <div className="text-xs text-zinc-500 tabular-nums">
-          {totalFilled} <span className="text-zinc-400">/ 72 jogos</span>
+        <div className="text-xs text-zinc-400 tabular-nums">
+          {totalFilled} <span className="text-zinc-600">/ 72 jogos</span>
         </div>
       </header>
 
@@ -70,7 +70,7 @@ export default function SimulatorPage() {
               randomizeAll();
             }
           }}
-          className="px-6 h-10 rounded bg-emerald-600 text-white font-bold uppercase text-xs tracking-wider hover:bg-emerald-700 transition"
+          className="px-6 h-10 rounded bg-emerald-500 text-zinc-950 font-bold uppercase text-xs tracking-wider hover:bg-emerald-400 transition"
         >
           Preencher aleatoriamente
         </button>
@@ -78,14 +78,14 @@ export default function SimulatorPage() {
           onClick={() => {
             if (confirm("Apagar todos os placares (grupos + mata-mata)?")) resetAll();
           }}
-          className="px-6 h-10 rounded bg-zinc-200 text-zinc-700 font-bold uppercase text-xs tracking-wider hover:bg-zinc-300 transition"
+          className="px-6 h-10 rounded bg-zinc-800 text-zinc-300 font-bold uppercase text-xs tracking-wider hover:bg-zinc-700 transition"
         >
           Limpar tudo
         </button>
         {totalFilled === 72 && (
           <Link
             href="/mata-mata"
-            className="px-6 h-10 inline-flex items-center rounded bg-blue-600 text-white font-bold uppercase text-xs tracking-wider hover:bg-blue-700 transition"
+            className="px-6 h-10 inline-flex items-center rounded bg-blue-500 text-zinc-950 font-bold uppercase text-xs tracking-wider hover:bg-blue-400 transition"
           >
             Ir pro mata-mata →
           </Link>
@@ -113,7 +113,7 @@ export default function SimulatorPage() {
         })}
       </div>
 
-      <footer className="mt-12 pt-6 border-t border-zinc-100 text-center text-[10px] text-zinc-400">
+      <footer className="mt-12 pt-6 border-t border-zinc-900 text-center text-[10px] text-zinc-600">
         by Dupla / Arena — regras oficiais FIFA 2026
       </footer>
     </div>

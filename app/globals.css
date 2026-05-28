@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #0a0a0a;
-  --border: #e5e7eb;
-  --muted: #6b7280;
-  --accent: #16a34a;
-  --danger: #dc2626;
+  --background: #0a0a0a;
+  --foreground: #fafafa;
+  --surface: #18181b;
+  --surface-2: #27272a;
+  --border: #27272a;
+  --muted: #71717a;
 }
 
 @theme inline {
@@ -15,9 +15,13 @@
   --font-sans: var(--font-inter);
 }
 
-body {
+html, body {
   background: var(--background);
   color: var(--foreground);
+  color-scheme: dark;
+}
+
+body {
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   font-feature-settings: "tnum" 1, "cv11" 1;
 }
@@ -30,4 +34,10 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+/* Dialog backdrop */
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
 }
