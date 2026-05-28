@@ -109,12 +109,6 @@ export default function KnockoutPage() {
         </div>
       )}
 
-      <div className="text-center mb-6">
-        <p className="text-xs text-zinc-500">
-          Clique em qualquer confronto pra preencher o placar.
-        </p>
-      </div>
-
       {/* Bracket */}
       <BracketView matches={resolvedBracket} onSelectMatch={setSelectedMatchId} />
 
