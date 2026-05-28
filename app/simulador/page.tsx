@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSimulation, getMatchesWithScores } from "@/store/simulationStore";
 import { computeGroupStandings } from "@/lib/standings";
@@ -8,6 +9,7 @@ import { MATCHES_BY_GROUP } from "@/data/groupMatches";
 import { GroupTable } from "@/components/GroupTable";
 import { MatchCard } from "@/components/MatchCard";
 import { GroupTabs } from "@/components/GroupTabs";
+import { NavTabs } from "@/components/NavTabs";
 
 export default function SimulatorPage() {
   const router = useRouter();
@@ -92,8 +94,20 @@ export default function SimulatorPage() {
           >
             Limpar
           </button>
+          {totalFilled === 72 && (
+            <Link
+              href="/mata-mata"
+              className="text-xs px-3 h-8 inline-flex items-center rounded bg-emerald-600 text-white font-semibold hover:bg-emerald-700 transition"
+            >
+              Ir pro mata-mata →
+            </Link>
+          )}
         </div>
       </header>
+
+      <div className="mb-6">
+        <NavTabs />
+      </div>
 
       {/* Group tabs */}
       <div className="mb-6">
