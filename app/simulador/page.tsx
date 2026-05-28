@@ -9,6 +9,7 @@ import { MATCHES_BY_GROUP } from "@/data/groupMatches";
 import { GROUPS } from "@/data/teams";
 import { GroupCard } from "@/components/GroupCard";
 import { NavTabs } from "@/components/NavTabs";
+import { BannerSlot } from "@/components/BannerSlot";
 
 export default function SimulatorPage() {
   const router = useRouter();
@@ -57,6 +58,8 @@ export default function SimulatorPage() {
           {totalFilled} <span className="text-zinc-600">/ 72 jogos</span>
         </div>
       </header>
+
+      <BannerSlot />
 
       <div className="mb-6">
         <NavTabs />

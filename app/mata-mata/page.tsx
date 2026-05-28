@@ -9,6 +9,7 @@ import { rankThirdPlaceTeams } from "@/lib/thirdPlaceRanking";
 import { BracketView } from "@/components/BracketView";
 import { KnockoutEditDialog } from "@/components/KnockoutEditDialog";
 import { NavTabs } from "@/components/NavTabs";
+import { BannerSlot } from "@/components/BannerSlot";
 import { TEAMS_BY_ID } from "@/data/teams";
 import { Flag } from "@/components/Flag";
 
@@ -85,6 +86,8 @@ export default function KnockoutPage() {
           Limpar mata-mata
         </button>
       </header>
+
+      <BannerSlot />
 
       <div className="mb-6">
         <NavTabs />
