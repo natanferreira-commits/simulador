@@ -35,11 +35,11 @@ export function BracketView({ matches, onSelectMatch }: Props) {
   }) {
     return (
       <div className="flex flex-col items-center">
-        <div className="text-[9px] font-bold uppercase tracking-widest text-zinc-400 mb-3 whitespace-nowrap">
+        <div className="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-5 whitespace-nowrap">
           {title}
         </div>
         <div
-          className={`flex flex-col gap-3 flex-1 ${
+          className={`flex flex-col gap-5 flex-1 ${
             align === "start" ? "justify-start" : align === "end" ? "justify-end" : "justify-around"
           }`}
         >
@@ -63,7 +63,7 @@ export function BracketView({ matches, onSelectMatch }: Props) {
   return (
     <div className="overflow-x-auto pb-8 pt-2">
       <div
-        className="grid gap-3 min-w-max mx-auto"
+        className="grid gap-6 min-w-max mx-auto"
         style={{
           gridTemplateColumns:
             "repeat(4, max-content) max-content repeat(4, max-content)",
@@ -76,20 +76,18 @@ export function BracketView({ matches, onSelectMatch }: Props) {
         <Column title={STAGE_LABEL.SF}  ids={LEFT_HALF.SF}  align="around" size="md" />
 
         {/* CENTER */}
-        <div className="flex flex-col items-center justify-center gap-6 px-3 min-w-[180px]">
-          <div className="text-[9px] font-bold uppercase tracking-widest text-zinc-400 mb-1">
+        <div className="flex flex-col items-center justify-center gap-8 px-6 min-w-[280px]">
+          <div className="text-sm font-bold uppercase tracking-widest text-zinc-700 mb-1">
             {STAGE_LABEL.F}
           </div>
-          <div className="relative">
-            <div className="text-2xl mb-2 text-center">🏆</div>
-            <BracketSlot
-              match={get(CENTER.FINAL)}
-              size="lg"
-              onClick={() => onSelectMatch(CENTER.FINAL)}
-            />
-          </div>
-          <div className="border-t border-dashed border-zinc-200 w-full my-3" />
-          <div className="text-[9px] font-bold uppercase tracking-widest text-zinc-400">
+          <div className="text-5xl text-center">🏆</div>
+          <BracketSlot
+            match={get(CENTER.FINAL)}
+            size="lg"
+            onClick={() => onSelectMatch(CENTER.FINAL)}
+          />
+          <div className="border-t border-dashed border-zinc-200 w-full my-4" />
+          <div className="text-xs font-bold uppercase tracking-widest text-zinc-500">
             {STAGE_LABEL["3RD"]}
           </div>
           <BracketSlot
