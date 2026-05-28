@@ -7,7 +7,7 @@ import { useSimulation, getMatchesWithScores } from "@/store/simulationStore";
 import { resolveBracket } from "@/lib/knockoutResolution";
 import { rankThirdPlaceTeams } from "@/lib/thirdPlaceRanking";
 import { BracketView } from "@/components/BracketView";
-import { KnockoutEditDialog } from "@/components/KnockoutEditDialog";
+import { KnockoutEditPopover } from "@/components/KnockoutEditPopover";
 import { NavTabs } from "@/components/NavTabs";
 import { BannerSlot } from "@/components/BannerSlot";
 import { TEAMS_BY_ID } from "@/data/teams";
@@ -22,7 +22,7 @@ export default function KnockoutPage() {
   const setKnockoutScore = useSimulation((s) => s.setKnockoutScore);
   const resetKnockout = useSimulation((s) => s.resetKnockout);
 
-  const [selectedMatchId, setSelectedMatchId] = useState<number | null>(null);
+  const [selected, setSelected] = useState<{ matchId: number; anchorRect: DOMRect } | null>(null);
 
   useEffect(() => {
     if (hasHydrated && !userName) {
@@ -54,8 +54,8 @@ export default function KnockoutPage() {
   );
 
   const selectedMatch =
-    selectedMatchId !== null
-      ? resolvedBracket.find((m) => m.id === selectedMatchId) ?? null
+    selected !== null
+      ? resolvedBracket.find((m) => m.id === selected.matchId) ?? null
       : null;
 
   if (!hasHydrated) {
@@ -110,7 +110,10 @@ export default function KnockoutPage() {
       )}
 
       {/* Bracket */}
-      <BracketView matches={resolvedBracket} onSelectMatch={setSelectedMatchId} />
+      <BracketView
+        matches={resolvedBracket}
+        onSelectMatch={(matchId, anchorRect) => setSelected({ matchId, anchorRect })}
+      />
 
       {/* Ranking dos 8 melhores 3ºs */}
       {groupsComplete && (
@@ -156,12 +159,13 @@ export default function KnockoutPage() {
         by Dupla / Arena — regras oficiais FIFA 2026
       </footer>
 
-      <KnockoutEditDialog
+      <KnockoutEditPopover
         match={selectedMatch}
-        onClose={() => setSelectedMatchId(null)}
+        anchorRect={selected?.anchorRect ?? null}
+        onClose={() => setSelected(null)}
         onSave={(h, a, pw) => {
-          if (selectedMatchId !== null) {
-            setKnockoutScore(selectedMatchId, h, a, pw);
+          if (selected !== null) {
+            setKnockoutScore(selected.matchId, h, a, pw);
           }
         }}
       />

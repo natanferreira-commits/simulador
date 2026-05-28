@@ -6,7 +6,7 @@ import { BracketCircle } from "./BracketCircle";
 
 interface Props {
   matches: ResolvedKnockoutMatch[];
-  onSelectMatch: (matchId: number) => void;
+  onSelectMatch: (matchId: number, anchorRect: DOMRect) => void;
 }
 
 const STAGE_LABEL: Record<string, string> = {
@@ -27,7 +27,7 @@ function MatchCell({
   size = "md",
 }: {
   match: ResolvedKnockoutMatch;
-  onSelect: () => void;
+  onSelect: (anchorRect: DOMRect) => void;
   /** Where the connector line should go */
   connector: "right" | "left" | "none";
   size?: "sm" | "md" | "lg";
@@ -62,7 +62,7 @@ function MatchPair({
   topMatch: ResolvedKnockoutMatch;
   bottomMatch: ResolvedKnockoutMatch;
   side: "left" | "right";
-  onSelect: (id: number) => void;
+  onSelect: (id: number, anchorRect: DOMRect) => void;
   size?: "sm" | "md" | "lg";
 }) {
   // The vertical joining line lives on the inner edge (right for LEFT half,
@@ -76,13 +76,13 @@ function MatchPair({
       <div className="flex flex-col justify-around gap-8">
         <MatchCell
           match={topMatch}
-          onSelect={() => onSelect(topMatch.id)}
+          onSelect={(rect) => onSelect(topMatch.id, rect)}
           connector={isLeft ? "right" : "left"}
           size={size}
         />
         <MatchCell
           match={bottomMatch}
-          onSelect={() => onSelect(bottomMatch.id)}
+          onSelect={(rect) => onSelect(bottomMatch.id, rect)}
           connector={isLeft ? "right" : "left"}
           size={size}
         />
@@ -177,7 +177,7 @@ export function BracketView({ matches, onSelectMatch }: Props) {
         <div className="flex justify-end items-center">
           <MatchCell
             match={get(LEFT_HALF.SF[0])}
-            onSelect={() => onSelectMatch(LEFT_HALF.SF[0])}
+            onSelect={(rect) => onSelectMatch(LEFT_HALF.SF[0], rect)}
             connector="right"
             size="md"
           />
@@ -188,7 +188,7 @@ export function BracketView({ matches, onSelectMatch }: Props) {
           <div className="text-3xl">🏆</div>
           <MatchCell
             match={get(CENTER.FINAL)}
-            onSelect={() => onSelectMatch(CENTER.FINAL)}
+            onSelect={(rect) => onSelectMatch(CENTER.FINAL, rect)}
             connector="none"
             size="lg"
           />
@@ -201,7 +201,7 @@ export function BracketView({ matches, onSelectMatch }: Props) {
           </div>
           <MatchCell
             match={get(CENTER.THIRD)}
-            onSelect={() => onSelectMatch(CENTER.THIRD)}
+            onSelect={(rect) => onSelectMatch(CENTER.THIRD, rect)}
             connector="none"
             size="md"
           />
@@ -213,7 +213,7 @@ export function BracketView({ matches, onSelectMatch }: Props) {
         <div className="flex justify-start items-center">
           <MatchCell
             match={get(RIGHT_HALF.SF[0])}
-            onSelect={() => onSelectMatch(RIGHT_HALF.SF[0])}
+            onSelect={(rect) => onSelectMatch(RIGHT_HALF.SF[0], rect)}
             connector="left"
             size="md"
           />

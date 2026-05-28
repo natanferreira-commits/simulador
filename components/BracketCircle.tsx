@@ -9,7 +9,7 @@ interface Props {
   match: ResolvedKnockoutMatch;
   /** Which side of the match this circle is for */
   side: "home" | "away";
-  onClick: () => void;
+  onClick: (anchorRect: DOMRect) => void;
   size?: "sm" | "md" | "lg";
 }
 
@@ -43,7 +43,7 @@ export function BracketCircle({ match, side, onClick, size = "md" }: Props) {
   // Resolved team: filled with bandeira; unresolved: empty with label
   return (
     <button
-      onClick={onClick}
+      onClick={(e) => onClick(e.currentTarget.getBoundingClientRect())}
       title={team?.name ?? label}
       className={`${sizeClass} relative rounded-full border flex items-center justify-center transition shrink-0 ${
         isWinner
