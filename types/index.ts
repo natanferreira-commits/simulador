@@ -7,6 +7,8 @@ export type TeamId = string;
 export interface Team {
   id: TeamId;
   name: string;
+  /** 3-letter PT-BR code (BRA, MEX, AFS) */
+  code: string;
   flag: string;
   fifaRanking: number;
   group: GroupLetter;
@@ -16,6 +18,8 @@ export interface GroupMatch {
   id: string;
   group: GroupLetter;
   round: 1 | 2 | 3;
+  /** ISO date "2026-06-11" */
+  date: string;
   homeId: TeamId;
   awayId: TeamId;
   homeGoals: number | null;

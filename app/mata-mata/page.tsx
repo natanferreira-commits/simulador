@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSimulation, getMatchesWithScores } from "@/store/simulationStore";
 import { resolveBracket } from "@/lib/knockoutResolution";
 import { rankThirdPlaceTeams } from "@/lib/thirdPlaceRanking";
 import { BracketView } from "@/components/BracketView";
+import { KnockoutEditDialog } from "@/components/KnockoutEditDialog";
 import { NavTabs } from "@/components/NavTabs";
 import { TEAMS_BY_ID } from "@/data/teams";
 import { Flag } from "@/components/Flag";
@@ -19,6 +20,8 @@ export default function KnockoutPage() {
   const knockoutMatches = useSimulation((s) => s.knockoutMatches);
   const setKnockoutScore = useSimulation((s) => s.setKnockoutScore);
   const resetKnockout = useSimulation((s) => s.resetKnockout);
+
+  const [selectedMatchId, setSelectedMatchId] = useState<number | null>(null);
 
   useEffect(() => {
     if (hasHydrated && !userName) {
@@ -49,6 +52,11 @@ export default function KnockoutPage() {
     [allMatches, knockoutMatches],
   );
 
+  const selectedMatch =
+    selectedMatchId !== null
+      ? resolvedBracket.find((m) => m.id === selectedMatchId) ?? null
+      : null;
+
   if (!hasHydrated) {
     return (
       <div className="flex flex-1 items-center justify-center">
@@ -67,17 +75,15 @@ export default function KnockoutPage() {
           </div>
           <h1 className="text-xl font-bold text-zinc-900">{userName}</h1>
         </div>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => {
-              if (confirm("Apagar todos os placares do mata-mata?"))
-                resetKnockout();
-            }}
-            className="text-xs px-3 h-8 rounded border border-zinc-300 text-zinc-700 hover:bg-zinc-50 transition"
-          >
-            Limpar mata-mata
-          </button>
-        </div>
+        <button
+          onClick={() => {
+            if (confirm("Apagar todos os placares do mata-mata?"))
+              resetKnockout();
+          }}
+          className="text-xs px-3 h-8 rounded border border-zinc-300 text-zinc-700 hover:bg-zinc-50 transition"
+        >
+          Limpar mata-mata
+        </button>
       </header>
 
       <div className="mb-6">
@@ -100,9 +106,18 @@ export default function KnockoutPage() {
         </div>
       )}
 
-      {/* Ranking dos 8 melhores 3ºs */}
+      <div className="text-center mb-6">
+        <p className="text-xs text-zinc-500">
+          Clique em qualquer confronto pra preencher o placar.
+        </p>
+      </div>
+
+      {/* Bracket */}
+      <BracketView matches={resolvedBracket} onSelectMatch={setSelectedMatchId} />
+
+      {/* Ranking dos 8 melhores 3ºs (após o bracket pra dar destaque ao bracket) */}
       {groupsComplete && (
-        <section className="mb-8">
+        <section className="mt-10 pt-8 border-t border-zinc-200">
           <h2 className="text-xs font-bold uppercase tracking-widest text-zinc-700 mb-3">
             Ranking dos terceiros colocados
             <span className="ml-2 text-zinc-400 font-normal normal-case tracking-normal">
@@ -140,19 +155,19 @@ export default function KnockoutPage() {
         </section>
       )}
 
-      <section>
-        <h2 className="text-xs font-bold uppercase tracking-widest text-zinc-700 mb-3">
-          Chaveamento
-        </h2>
-        <BracketView
-          matches={resolvedBracket}
-          onScoreChange={setKnockoutScore}
-        />
-      </section>
-
       <footer className="mt-12 pt-6 border-t border-zinc-100 text-center text-[10px] text-zinc-400">
         by Dupla / Arena — regras oficiais FIFA 2026
       </footer>
+
+      <KnockoutEditDialog
+        match={selectedMatch}
+        onClose={() => setSelectedMatchId(null)}
+        onSave={(h, a, pw) => {
+          if (selectedMatchId !== null) {
+            setKnockoutScore(selectedMatchId, h, a, pw);
+          }
+        }}
+      />
     </div>
   );
 }
