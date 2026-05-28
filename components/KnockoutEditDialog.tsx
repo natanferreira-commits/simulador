@@ -16,8 +16,8 @@ interface Props {
 }
 
 const STAGE_LABEL: Record<string, string> = {
-  R32: "Oitavas de 32",
-  R16: "Oitavas de 16",
+  R32: "16 avos de final",
+  R16: "Oitavas de final",
   QF:  "Quartas de final",
   SF:  "Semifinal",
   F:   "FINAL",

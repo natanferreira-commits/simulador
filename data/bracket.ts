@@ -76,8 +76,8 @@ export const BRACKET_BY_STAGE: Record<string, BracketSlot[]> = BRACKET.reduce(
 );
 
 export const STAGES_ORDER: Array<{ stage: "R32" | "R16" | "QF" | "SF" | "F" | "3RD"; label: string }> = [
-  { stage: "R32", label: "Oitavas de 32" },
-  { stage: "R16", label: "Oitavas de 16" },
+  { stage: "R32", label: "16 avos de final" },
+  { stage: "R16", label: "Oitavas de final" },
   { stage: "QF",  label: "Quartas" },
   { stage: "SF",  label: "Semifinais" },
   { stage: "3RD", label: "3º lugar" },
