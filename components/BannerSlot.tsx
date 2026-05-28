@@ -1,26 +1,29 @@
+import Image from "next/image";
+
 /**
- * Banner placeholder. Substituir pelo banner real (imagem, iframe ou
- * componente de ad network) quando definido.
+ * Banner do oDupla — 1200x280.
  *
- * Formato padrão: leaderboard horizontal (~728x90 a 970x120). Responsivo
- * pra ocupar toda a largura do container, com altura controlada por
- * aspect ratio em telas grandes e min-height em telas menores.
+ * A imagem precisa estar em /public/banner-odupla.png.
+ * Quando rolar o link real (YouTube / Instagram), trocar o href.
  */
 export function BannerSlot() {
   return (
-    <div
-      role="complementary"
-      aria-label="Espaço publicitário"
-      className="w-full flex items-center justify-center rounded-md border border-dashed border-zinc-800 bg-zinc-900/40 text-zinc-600 hover:border-zinc-700 hover:bg-zinc-900/60 transition cursor-default min-h-[90px] md:min-h-[100px] my-4"
+    <a
+      href="https://www.youtube.com/@oDupla"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="oDupla — vídeos novos todos os dias"
+      className="relative block w-full overflow-hidden rounded-md border border-zinc-800 hover:border-zinc-700 transition my-4"
+      style={{ aspectRatio: "1200 / 280" }}
     >
-      <div className="flex flex-col items-center gap-1 py-4">
-        <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">
-          Espaço publicitário
-        </div>
-        <div className="text-[9px] uppercase tracking-widest text-zinc-700">
-          Banner · 970 × 90
-        </div>
-      </div>
-    </div>
+      <Image
+        src="/banner-odupla.png"
+        alt="oDupla — vídeos novos todos os dias"
+        fill
+        sizes="(max-width: 1200px) 100vw, 1200px"
+        className="object-cover"
+        priority
+      />
+    </a>
   );
 }
